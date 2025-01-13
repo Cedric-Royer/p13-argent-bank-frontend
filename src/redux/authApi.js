@@ -19,7 +19,14 @@ export const authApi = createApi({
         method: 'POST',
       }),
     }),
+    login: builder.mutation({
+      query: (credentials) => ({
+        url: 'user/login',
+        method: 'POST',
+        body: credentials,
+      }),
+    }),
   }),
 });
 
-export const { useFetchUserProfileQuery } = authApi;
+export const { useFetchUserProfileQuery, useLoginMutation } = authApi;

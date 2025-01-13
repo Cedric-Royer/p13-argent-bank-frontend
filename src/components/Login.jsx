@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useDispatch } from "react-redux"; 
-import { login } from "../redux/authSlice"; 
+import { useDispatch } from "react-redux";
+import { login as loginAction } from "../redux/authSlice";
+import { useLoginMutation } from "../redux/authApi";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -11,20 +11,17 @@ const Login = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch(); 
+  const [login, { isLoading }] = useLoginMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
 
     try {
-      const response = await axios.post("http://localhost:3001/api/v1/user/login", {
-        email: username,
-        password: password,
-      });
+      const response = await login({ email: username, password }).unwrap();
+      const token = response.body.token;
 
-      const token = response.data.body.token;
-
-      dispatch(login({ token, rememberMe }));
+      dispatch(loginAction({ token, rememberMe }));
 
       navigate("/profile");
     } catch (error) {
@@ -68,8 +65,8 @@ const Login = () => {
               />
               <label htmlFor="remember-me">Remember me</label>
             </div>
-            <button type="submit" className="sign-in-button">
-              Sign In
+            <button type="submit" className="sign-in-button" disabled={isLoading}>
+              {isLoading ? "Signing In..." : "Sign In"}
             </button>
           </form>
           {error && <p className="error">{error}</p>}
