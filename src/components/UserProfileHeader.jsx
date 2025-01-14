@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useUpdateUserProfileMutation, useFetchUserProfileQuery } from '../redux/authApi';
 
 const UserProfileHeader = ({ user }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [firstName, setFirstName] = useState(user.firstName || '');
   const [lastName, setLastName] = useState(user.lastName || '');
+  const [updateUserProfile] = useUpdateUserProfileMutation();
+  const { refetch } = useFetchUserProfileQuery();
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -13,9 +16,15 @@ const UserProfileHeader = ({ user }) => {
     setIsEditing(false);
   };
 
-  const handleSaveClick = () => {
-    console.log('The name has changed:', firstName, lastName);
-    setIsEditing(false);
+  const handleSaveClick = async () => {
+    try {
+      await updateUserProfile({ firstName, lastName }).unwrap();
+      refetch();
+      setIsEditing(false);
+      console.log('The name has been updated:', firstName, lastName);
+    } catch (error) {
+      console.error('Failed to update user profile:', error);
+    }
   };
 
   return (

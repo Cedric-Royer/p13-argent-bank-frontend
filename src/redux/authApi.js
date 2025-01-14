@@ -19,6 +19,13 @@ export const authApi = createApi({
         method: 'POST',
       }),
     }),
+    updateUserProfile: builder.mutation({
+      query: (userData) => ({
+        url: 'user/profile',
+        method: 'PUT',
+        body: userData,
+      }),
+    }),
     login: builder.mutation({
       query: (credentials) => ({
         url: 'user/login',
@@ -29,4 +36,4 @@ export const authApi = createApi({
   }),
 });
 
-export const { useFetchUserProfileQuery, useLoginMutation } = authApi;
+export const { useFetchUserProfileQuery, useUpdateUserProfileMutation, useLoginMutation } = authApi;
