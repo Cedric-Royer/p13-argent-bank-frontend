@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFetchUserProfileQuery } from '../redux/authApi';
-import AccountList from './AccountList';
-import UserProfileHeader from './UserProfileHeader';
+import AccountList from '../components/AccountList';
+import UserProfileHeader from '../components/UserProfileHeader';
 
 const Profile = () => {
   const { data, error, isLoading } = useFetchUserProfileQuery();
