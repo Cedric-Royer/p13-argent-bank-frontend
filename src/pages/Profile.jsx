@@ -8,10 +8,11 @@ import UserProfileHeader from '../components/UserProfileHeader';
 const Profile = () => {
   const navigate = useNavigate();
   const isConnected = useSelector((state) => state.auth.isConnected); 
+  const wasLoggedOut = useSelector((state) => state.auth.wasLoggedOut);
 
   useEffect(() => {
     if (!isConnected) {
-      navigate("/login", { replace: true });
+      navigate(wasLoggedOut ? "/" : "/login", { replace: true });
     }
   }, [isConnected, navigate]);
   
