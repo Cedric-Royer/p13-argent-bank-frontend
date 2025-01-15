@@ -4,6 +4,7 @@ const initialState = {
   token: null,
   loading: false,
   error: null,
+  isConnected: false,
 };
 
 const authSlice = createSlice({
@@ -13,6 +14,7 @@ const authSlice = createSlice({
     login(state, action) {
       const { token, rememberMe } = action.payload;
       state.token = token;
+      state.isConnected = true;
 
       if (rememberMe) {
         localStorage.setItem('authToken', token);
@@ -22,6 +24,7 @@ const authSlice = createSlice({
     },
     logout(state) {
       state.token = null;
+      state.isConnected = false;
       localStorage.removeItem('authToken');
       sessionStorage.removeItem('authToken');
     },
@@ -31,7 +34,7 @@ const authSlice = createSlice({
 
       if (token) {
         state.token = token;
-
+        state.isConnected = true; 
       }
     },
   },

@@ -1,9 +1,17 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import { useFetchUserProfileQuery } from '../redux/authApi';
 import AccountList from '../components/AccountList';
 import UserProfileHeader from '../components/UserProfileHeader';
 
 const Profile = () => {
+  const isConnected = useSelector((state) => state.auth.isConnected); 
+
+  if (!isConnected) {
+    return <Navigate to="/login" replace />; 
+  }
+
   const { data, error, isLoading } = useFetchUserProfileQuery();
 
   if (isLoading) {
