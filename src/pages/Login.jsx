@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux"; 
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login as loginAction } from "../redux/authSlice";
@@ -9,9 +10,19 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.token); 
   const dispatch = useDispatch(); 
   const [login, { isLoading }] = useLoginMutation();
+  const isConnected = useSelector((state) => state.auth.isConnected);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isConnected) {
+      navigate("/profile", { replace: true });
+    }
+  }, [isConnected, navigate]);
+
+  if (isConnected) return null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
