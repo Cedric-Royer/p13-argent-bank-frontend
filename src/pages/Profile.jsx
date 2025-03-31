@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useFetchUserProfileQuery } from '../redux/authApi';
@@ -14,7 +14,7 @@ const Profile = () => {
     if (!isConnected) {
       navigate(wasLoggedOut ? "/" : "/login", { replace: true });
     }
-  }, [isConnected, navigate]);
+  }, [isConnected, navigate, wasLoggedOut]);
   
   const { data, error, isLoading } = useFetchUserProfileQuery();
 

@@ -1,4 +1,3 @@
-import React from "react";
 import FeatureItem from "./FeatureItem";
 
 const Features = () => {

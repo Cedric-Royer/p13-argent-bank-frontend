@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useUpdateUserProfileMutation, useFetchUserProfileQuery } from '../redux/authApi';
+import PropTypes from 'prop-types';
 
 const UserProfileHeader = ({ user }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -72,6 +73,13 @@ const UserProfileHeader = ({ user }) => {
       )}
     </div>
   );
+};
+
+UserProfileHeader.propTypes = {
+  user: PropTypes.shape({
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default UserProfileHeader;

@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 
 const AccountSection = ({ title, amount, description }) => {
   return (
@@ -13,6 +13,12 @@ const AccountSection = ({ title, amount, description }) => {
       </div>
     </section>
   );
+};
+
+AccountSection.propTypes = {
+  title: PropTypes.string.isRequired,
+  amount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  description: PropTypes.string.isRequired,
 };
 
 export default AccountSection;

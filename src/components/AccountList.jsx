@@ -1,4 +1,3 @@
-import React from 'react';
 import AccountSection from './AccountSection';
 
 const AccountList = () => {

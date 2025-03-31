@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -18,7 +18,7 @@ const NotFound = () => {
     <main className="main bg-dark">
       <section className="not-found">
         <h1>404</h1>
-        <p>The page you're looking for doesn't exist.</p>
+        <p>The page you&apos;re looking for doesn&apos;t exist.</p>
         <button onClick={() => navigate("/")} className="btn">
           Go to Home
         </button>

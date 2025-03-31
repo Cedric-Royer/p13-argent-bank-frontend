@@ -1,14 +1,14 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';  // Import du Provider pour Redux
-import { store } from './redux/store';  // Import du store Redux
+import { Provider } from 'react-redux';
+import { store } from './redux/store'; 
 import './index.css';
-import App from './App.jsx';  // Import de ton composant principal
+import App from './App.jsx'; 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Provider store={store}>  {/* Fournir le store Redux à toute l'application */}
-      <App />  {/* Ton composant App */}
+    <Provider store={store}>
+      <App />
     </Provider>
   </StrictMode>
 );
