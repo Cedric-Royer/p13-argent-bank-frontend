@@ -1,4 +1,4 @@
-import FeatureItem from "./FeatureItem";
+import FeatureItem from "./FeatureItem/FeatureItem";
 
 const Features = () => {
     const featuresData = [

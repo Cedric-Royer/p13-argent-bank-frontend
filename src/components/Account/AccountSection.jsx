@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import './AccountSection.css'
 
 const AccountSection = ({ title, amount, description }) => {
   return (

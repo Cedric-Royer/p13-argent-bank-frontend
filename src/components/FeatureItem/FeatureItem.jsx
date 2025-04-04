@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import './FeatureItem.css';
 
 const FeatureItem = ({ icon, title, description }) => {
   return (
