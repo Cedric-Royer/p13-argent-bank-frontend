@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useFetchUserProfileQuery } from '../redux/authApi';
 import AccountList from '../components/Account/AccountList';
-import UserProfileHeader from '../components/UserProfileHeader';
+import UserProfileHeader from '../components/UserProfileHeader/UserProfileHeader';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const Profile = () => {
   }
 
   if (error) {
-    return <p>Error: {error.message}</p>;
+    return <p>{error.error || error.status}</p>;
   }
 
   return (

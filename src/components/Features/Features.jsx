@@ -1,4 +1,5 @@
-import FeatureItem from "./FeatureItem/FeatureItem";
+import FeatureItem from "../FeatureItem/FeatureItem";
+import './Features.css';
 
 const Features = () => {
     const featuresData = [

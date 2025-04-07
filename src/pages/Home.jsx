@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux"; 
 import { useNavigate } from "react-router-dom"; 
-import Hero from "../components/Hero";
-import Features from "../components/Features";
+import Hero from "../components/Hero/Hero";
+import Features from "../components/Features/Features";
 
 const Home = () => {
   const navigate = useNavigate();

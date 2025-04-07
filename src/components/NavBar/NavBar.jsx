@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"; 
-import { logout } from "../redux/authSlice"; 
+import { logout } from "../../redux/authSlice"; 
 import { useNavigate } from "react-router-dom";
+import './NavBar.css';
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -9,7 +10,6 @@ const NavBar = () => {
 
   const handleLogout = (e) => {
     e.preventDefault(); 
-    console.log("Déconnexion");
     dispatch(logout()); 
     navigate("/"); 
   };

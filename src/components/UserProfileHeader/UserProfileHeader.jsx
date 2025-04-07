@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { useUpdateUserProfileMutation, useFetchUserProfileQuery } from '../redux/authApi';
+import { useUpdateUserProfileMutation, useFetchUserProfileQuery } from '../../redux/authApi';
 import PropTypes from 'prop-types';
+import './UserProfileHeader.css';
 
 const UserProfileHeader = ({ user }) => {
   const [isEditing, setIsEditing] = useState(false);
