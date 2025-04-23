@@ -3,7 +3,7 @@ import Layout from "./Layout";
 import Home from "../pages/Home";
 import Login from "../pages/Login/Login";
 import Profile from "../pages/Profile"; 
-import NotFound from "../pages/NotFound";
+import NotFound from "../pages/NotFound/NotFound";
 
 const AppRouter = () => {
   return (

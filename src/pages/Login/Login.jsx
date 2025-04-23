@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login as loginAction } from "../../redux/authSlice";
 import { useLoginMutation } from "../../redux/authApi";
+import { getUserAuthError } from "../../utils/authErrorHandler";
 import './Login.css';
 
 const Login = () => {
@@ -16,12 +17,8 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isConnected) {
-      navigate("/profile", { replace: true });
-    }
+    if (isConnected) navigate("/profile", { replace: true });
   }, [isConnected, navigate]);
-
-  if (isConnected) return null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,16 +26,15 @@ const Login = () => {
 
     try {
       const response = await login({ email: username, password }).unwrap();
-      const token = response.body.token;
-
-      dispatch(loginAction({ token, rememberMe }));
-
+      dispatch(loginAction({ token: response.body.token, rememberMe }));
       navigate("/profile");
     } catch (error) {
-      setError("Login failed. Please check your username and password.");
-      console.error("Login error:", error);
+      setError(getUserAuthError(error));
+      console.error('Login error:', error);
     }
   };
+
+  if (isConnected) return null;
 
   return (
       <main className="main bg-dark">
