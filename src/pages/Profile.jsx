@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useFetchUserProfileQuery } from '../redux/authApi';
+import { useFetchUserProfileQuery } from '../redux/profileApi';
 import AccountList from '../components/Account/AccountList';
 import UserProfileHeader from '../components/UserProfileHeader/UserProfileHeader';
 

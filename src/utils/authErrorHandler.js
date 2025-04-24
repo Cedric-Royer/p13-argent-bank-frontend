@@ -9,15 +9,13 @@ const errorMessages = {
 
 export const getUserAuthError = (error) => {
 
-    if (error.status === 'NETWORK_ERROR') return errorMessages.network;
-
     const backendMessage = error.data?.message?.toLowerCase() || '';
     const status = error.status;
 
     if (status === 400 || status === 401) {
         if (backendMessage.includes("user")) return errorMessages.specific.user;
         if (backendMessage.includes("password")) return errorMessages.specific.password;
-    }
+    } else if (error.status === 'NETWORK_ERROR' || 'FETCH_ERROR' ) return errorMessages.network;
 
 return errorMessages.default;
 };

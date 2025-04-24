@@ -2,8 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   token: null,
-  loading: false,
-  error: null,
   isConnected: false,
   wasLoggedOut: false,
 };
@@ -28,21 +26,29 @@ const authSlice = createSlice({
       state.token = null;
       state.isConnected = false;
       state.wasLoggedOut = true;
+      localStorage.setItem('logout-event', Date.now());
       localStorage.removeItem('authToken');
       sessionStorage.removeItem('authToken');
     },
-
+    forceLogout() {
+      sessionStorage.removeItem('authToken');
+      localStorage.removeItem('authToken');
+      return initialState; 
+    },
     checkAuthentication(state) {
       const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
-
       if (token) {
         state.token = token;
-        state.isConnected = true; 
-        state.wasLoggedOut = false;
+        state.isConnected = true;
+        state.wasLoggedOut = false; 
+      } else {
+        state.token = null;
+        state.isConnected = false;
+        state.rememberMe = false;
       }
     },
   },
 });
 
-export const { login, logout, checkAuthentication } = authSlice.actions;
+export const { login, logout, forceLogout, checkAuthentication } = authSlice.actions;
 export default authSlice.reducer;

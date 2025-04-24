@@ -1,21 +1,29 @@
-import { useEffect } from 'react';
+import { useLayoutEffect, useEffect } from 'react'; 
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from './redux/store';
-import { checkAuthentication } from './redux/authSlice';
+import { store } from './redux/store';
+import { checkAuthentication, forceLogout } from './redux/authSlice';
 import AppRouter from './components/Router';
 import './App.css';
 
 function App() {
-  useEffect(() => {
+  useLayoutEffect(() => {
     store.dispatch(checkAuthentication());
+  }, []);
+  useEffect(() => {
+    const handleStorageChange = (event) => {
+      if (event.key === 'logout-event') {
+        store.dispatch(forceLogout());
+        localStorage.removeItem('logout-event');
+      }
+    };
+  
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <AppRouter />
-      </PersistGate>
+      <AppRouter />
     </Provider>
   );
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useUpdateUserProfileMutation, useFetchUserProfileQuery } from '../../redux/authApi';
+import { useUpdateUserProfileMutation, useFetchUserProfileQuery } from '../../redux/profileApi';
 import PropTypes from 'prop-types';
 import './UserProfileHeader.css';
 
@@ -23,7 +23,6 @@ const UserProfileHeader = ({ user }) => {
       await updateUserProfile({ firstName, lastName }).unwrap();
       refetch();
       setIsEditing(false);
-      console.log('The name has been updated:', firstName, lastName);
     } catch (error) {
       console.error('Failed to update user profile:', error);
     }
