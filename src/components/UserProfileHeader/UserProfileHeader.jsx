@@ -18,7 +18,8 @@ const UserProfileHeader = ({ user }) => {
     setIsEditing(false);
   };
 
-  const handleSaveClick = async () => {
+  const handleSaveClick = async (event) => {
+    event.preventDefault();
     try {
       await updateUserProfile({ firstName, lastName }).unwrap();
       refetch();
@@ -35,30 +36,38 @@ const UserProfileHeader = ({ user }) => {
         <br />
         {isEditing ? (
           <div className="edit-profile">
-            <div className="edit-profile-inputs">
-              <input
-                type="text"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                placeholder="First Name"
-                className="input-field"
-              />
-              <input
-                type="text"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                placeholder="Last Name"
-                className="input-field"
-              />
-            </div>
-            <div className="edit-profile-buttons">
-              <button className="save-button" onClick={handleSaveClick}>
-                Save
-              </button>
-              <button className="cancel-button" onClick={handleCancelClick}>
-                Cancel
-              </button>
-            </div>
+            <form onSubmit={handleSaveClick}>
+              <div className="edit-profile-inputs">
+                <input
+                  type="text"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  placeholder="First Name"
+                  className="input-field"
+                  id="firstName"
+                  name="firstName"
+                  required
+                />
+                <input
+                  type="text"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  placeholder="Last Name"
+                  className="input-field"
+                  id="lastName"
+                  name="lastName"
+                  required
+                />
+              </div>              
+              <div className="edit-profile-buttons">
+                <button type="submit" className="save-button"> {/* Changement de role à type="submit" */}
+                  Save
+                </button>
+                <button type="button" className="cancel-button" onClick={handleCancelClick}> {/* Ajout de type="button" */}
+                  Cancel
+                </button>
+              </div>
+            </form>
           </div>
         ) : (
           <span>
