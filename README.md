@@ -37,7 +37,7 @@ Please refer to the backend repository for instructions on setting up and runnin
 
 ## Configuration
 
-Ensure the backend API is running on `http://localhost:3001`. If the backend URL is different, modify it in `src/services/authApi.js`.
+Ensure the backend API is running on `http://localhost:3001`. If the backend URL is different, modify it in `src/config.js`.
 
 ## Project Structure
 
