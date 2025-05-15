@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useFetchUserProfileQuery } from '../redux/profileApi';
+import { setProfile } from "../redux/profileSlice";
 import AccountList from '../components/Account/AccountList';
 import UserProfileHeader from '../components/UserProfileHeader/UserProfileHeader';
 
@@ -9,6 +10,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const isConnected = useSelector((state) => state.auth.isConnected); 
   const wasLoggedOut = useSelector((state) => state.auth.wasLoggedOut);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (!isConnected) {
@@ -17,6 +19,12 @@ const Profile = () => {
   }, [isConnected, navigate, wasLoggedOut]);
   
   const { data, error, isLoading } = useFetchUserProfileQuery();
+
+  useEffect(() => {
+    if (data?.body) {
+      dispatch(setProfile(data.body));
+    }
+  }, [data, dispatch]);
 
   if (isLoading) {
     return <p>Loading...</p>;

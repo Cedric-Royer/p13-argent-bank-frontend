@@ -32,3 +32,9 @@
   max-width: 100%;
   width: 200px;
 }
+
+.main-nav-firstname {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 25px 0 10px
+}
